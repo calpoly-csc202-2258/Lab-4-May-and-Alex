@@ -4,15 +4,21 @@ from typing import *
 from dataclasses import dataclass
 sys.setrecursionlimit(10**6)
 
-BST : TypeAlias = Union[None, "BSTNode"]
+BinTree : TypeAlias = Union[None, "Node"]
 
 @dataclass(frozen=True)
-class BSTNode:
+class Node:
     val: Any
-    left: BST
-    right: BST
+    left: BinTree
+    right: BinTree
 
-    comes_before: Callable[[Any,Any],bool]
+
+
+@dataclass(frozen=True)
+class BinarySearchTree:
+    comes_before: Callable[[Any, Any], bool]
+    tree: BinTree
+
 
 #returns False if tree is empty, otherwise returns True
 def is_empty(tree: BinarySearchTree) -> bool:
