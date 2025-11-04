@@ -6,7 +6,7 @@ sys.setrecursionlimit(10**6)
 
 BinTree : TypeAlias = Union[None, "Node"]
 
-@dataclass(frozen=True)
+@dataclass
 class Node:
     val: Any
     left: BinTree
@@ -26,3 +26,14 @@ def is_empty(tree: BinarySearchTree) -> bool:
         case None:
             return False
     return True
+
+#adds val to bst in the correct place basses on the comes_before argument of bst
+def insert(bst: BinarySearchTree, val: Any) -> BinarySearchTree:
+
+    def insert_helper(bst: BinarySearchTree, func: Callable[[Any, Any], bool], val: Any):
+        pass
+
+
+    return insert_helper(bst, bst.comes_before, val)
+
+
