@@ -13,3 +13,10 @@ class BSTNode:
     right: BST
 
     comes_before: Callable[[Any,Any],bool]
+
+#returns False if tree is empty, otherwise returns True
+def is_empty(tree: BinarySearchTree) -> bool:
+    match tree:
+        case None:
+            return False
+    return True
