@@ -22,7 +22,7 @@ class BinarySearchTree:
 
 #returns False if tree is empty, otherwise returns True
 def is_empty(tree: BinarySearchTree) -> bool:
-    match tree:
+    match tree.tree:
         case None:
             return False
     return True
@@ -51,7 +51,18 @@ def insert(bst: BinarySearchTree, val: Any) -> BinarySearchTree:
 
     return insert_helper(bst, bst.comes_before, val)
 
-
-
-
+#returns True if v is in tree, otherwise returns False
+def lookup(tree: BinarySearchTree, v: Any) -> bool:
+    def lookup_helper(tree: BinTree, v: Any, func: Callable[[Any, Any], bool]) -> bool:
+        match tree:
+            case None:
+                return False
+            case Node(val,l,r):
+                if v==val:
+                    return True
+                elif func(v,val): #might be reverse
+                    return lookup_helper(l, v, func)
+                else:
+                    return lookup_helper(r, v, func)
+    return lookup_helper(tree.tree,v,tree.comes_before)
 
