@@ -73,9 +73,40 @@ def lookup(tree: BinarySearchTree, v: Any) -> bool:
             case Node(val,l,r):
                 if v==val:
                     return True
-                elif func(v,val): #might be reverse
+                elif func(v,val): #might be in reverse
                     return lookup_helper(l, v, func)
                 else:
                     return lookup_helper(r, v, func)
     return lookup_helper(tree.tree,v,tree.comes_before)
+
+#deletes val from tree
+def delete(tree: BinarySearchTree, val: Any) -> BinarySearchTree:
+    def del_helper (tree: BinTree, val: Any, func: Callable[[Any, Any], bool]) -> BinarySearchTree:
+        def dellargest(tree: BinTree) -> BinarySearchTree:
+            match tree:
+                case None:
+                    raise ValueError ("deleted the largest leaf of a nonexistant tree")
+                case Node(v, l, r):
+                    if r is None:
+                        return l
+                    return Node(v,l,dellargest(r))
+        def largest_val(tree: BinTree) -> Any:
+            match tree:
+                case None:
+                    raise ValueError ("tried to find the largest leaf of a nonexistant tree")
+                case Node(v, l, r):
+                    if r is None:
+                        return v
+                    return largest_val(r)
+        match tree:
+            case None:
+                return None
+            case Node(v, l, r):
+                if v==val:
+                    return Node(largest_val(l),dellargest(l),r)
+                elif func(val,v):
+                    return Node(v, del_helper(l,val,func), r)
+                else:
+                    return Node(v, l, del_helper(r,val,func))
+    return del_helper(tree, val, tree.comes_before)
 
