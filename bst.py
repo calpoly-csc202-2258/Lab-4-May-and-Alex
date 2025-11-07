@@ -80,25 +80,25 @@ def lookup(tree: BinarySearchTree, v: Any) -> bool:
     return lookup_helper(tree.tree,v,tree.comes_before)
 
 #deletes val from tree
-def delete(tree: BinarySearchTree, val: Any) -> BinarySearchTree:
-    def del_helper (tree: BinTree, val: Any, func: Callable[[Any, Any], bool]) -> BinarySearchTree:
-        def dellargest(tree: BinTree) -> BinarySearchTree:
-            match tree:
+def delete(otree: BinarySearchTree, val: Any) -> BinarySearchTree:
+    def del_helper (btree: BinTree, val: Any, func: Callable[[Any, Any], bool]) -> BinTree:
+        def dellargest(dtree: BinTree) -> BinTree:
+            match dtree:
                 case None:
                     raise ValueError ("deleted the largest leaf of a nonexistant tree")
                 case Node(v, l, r):
                     if r is None:
                         return l
                     return Node(v,l,dellargest(r))
-        def largest_val(tree: BinTree) -> Any:
-            match tree:
+        def largest_val(ltree: BinTree) -> Any:
+            match ltree:
                 case None:
                     raise ValueError ("tried to find the largest leaf of a nonexistant tree")
-                case Node(v, l, r):
+                case Node(v, _, r):
                     if r is None:
                         return v
                     return largest_val(r)
-        match tree:
+        match btree:
             case None:
                 return None
             case Node(v, l, r):
@@ -108,5 +108,4 @@ def delete(tree: BinarySearchTree, val: Any) -> BinarySearchTree:
                     return Node(v, del_helper(l,val,func), r)
                 else:
                     return Node(v, l, del_helper(r,val,func))
-    return del_helper(tree, val, tree.comes_before)
-
+    return BinarySearchTree(otree.comes_before, del_helper(otree.tree, val, otree.comes_before))
