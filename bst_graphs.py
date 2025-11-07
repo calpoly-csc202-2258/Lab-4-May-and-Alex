@@ -11,10 +11,12 @@ sys.setrecursionlimit(10**6)
 from bst import *
 
 TREES_PER_RUN : int = 10000
+
 def example_graph_creation() -> None:
     # Return log-base-2 of 'x' + 5.
-    # def f_to_graph( x : float ) -> float:
-    # return math.log2( x ) + 5.0
+    def f_to_graph( x : float ) -> float:
+        return math.log2( x ) + 5.0
+
     # here we're using "list comprehensions": more of Python's
     # syntax sugar.
     x_coords : List[float] = [ float(i) for i in range( 1, 100 ) ]
@@ -31,7 +33,7 @@ def example_graph_creation() -> None:
     plt.title("Example Graph")
     plt.grid(True)
     plt.legend() # makes the 'label's show up
-    # plt.show()
+    plt.show()
 
 
 if (__name__ == '__main__'):

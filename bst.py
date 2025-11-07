@@ -4,6 +4,7 @@ import unittest
 from typing import *
 from dataclasses import dataclass
 sys.setrecursionlimit(10**6)
+import time
 
 BinTree : TypeAlias = Union[None, "Node"]
 
@@ -19,6 +20,8 @@ class Node:
 class BinarySearchTree:
     comes_before: Callable[[Any, Any], bool]
     tree: BinTree
+
+TREES_PER_RUN = 10000
 
 
 #returns False if tree is empty, otherwise returns True
@@ -109,3 +112,19 @@ def delete(otree: BinarySearchTree, val: Any) -> BinarySearchTree:
                 else:
                     return Node(v, l, del_helper(r,val,func))
     return BinarySearchTree(otree.comes_before, del_helper(otree.tree, val, otree.comes_before))
+
+
+
+def height(btree : BinTree) -> int:
+    if btree is None:
+        return 0
+    return 1 + max(height(btree.left), height(btree.right))
+
+n_max = 10000
+
+start = time.perf_counter()
+for i in range(TREES_PER_RUN):
+    btree = random_tree(n_max)
+    height(btree.tree)
+end = time.perf_counter()
+print(start-end)
