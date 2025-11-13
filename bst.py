@@ -120,13 +120,15 @@ def height(btree : BinTree) -> int:
     return 1 + max(height(btree.left), height(btree.right))
 
 n_max = 30
+heights_total = 0
+all_heights_adv = []
 
-start = time.perf_counter()
 for i in range(TREES_PER_RUN):
     btree = random_tree(n_max)
-    height(btree.tree)
-end = time.perf_counter()
-print(end-start)
+    heights_total += height(btree.tree)
+    heights_total = heights_total/30
+all_heights_adv.append(heights_total)
+
 
 '''
 Make a graph of average tree height (y axis) as a funcƟon of N (x axis). Use 50(do 30) different N
