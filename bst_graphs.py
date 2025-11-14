@@ -13,13 +13,9 @@ from bst import *
 TREES_PER_RUN : int = 10000
 
 def graph_heights_of_random_trees() -> None:
-    # Return log-base-2 of 'x' + 5.
-    def f_to_graph( x : float ) -> float:
-        return math.log2( x ) + 5.0
-
     # here we're using "list comprehensions": more of Python's
     # syntax sugar.
-    x_coords : List[float] = [ floaty(i) for i in range( 0,  n_max) ]
+    x_coords : List[int] = [ int(i) for i in range( 0,  n_max) ]
     y_coords : List[float] = all_heights_avg
     # Could have just used this type from the start, but I want
     # to emphasize that 'matplotlib' uses 'numpy''s specific array
@@ -27,9 +23,9 @@ def graph_heights_of_random_trees() -> None:
     # type.
     x_numpy : np.ndarray = np.array( x_coords )
     y_numpy : np.ndarray = np.array( y_coords )
-    plt.plot( x_numpy, y_numpy, label = 'Height of Random Trees' )
-    plt.xlabel("X")
-    plt.ylabel("Y")
+    plt.plot( x_numpy, y_numpy, label = 'Average Height' )
+    plt.xlabel("n values in tree")
+    plt.ylabel("Height of tree")
     plt.title("Height of Random Trees")
     plt.grid(True)
     plt.legend() # makes the 'label's show up

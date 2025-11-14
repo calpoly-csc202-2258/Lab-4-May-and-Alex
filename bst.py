@@ -124,8 +124,8 @@ heights_total = 0
 all_heights_avg = []
 
 for i in range(n_max):
-    for i in range(TREES_PER_RUN):
-        btree = random_tree(n_max)
+    for b in range(TREES_PER_RUN):
+        btree = random_tree(i)
         heights_total += height(btree.tree)
     heights_total = heights_total / TREES_PER_RUN
     all_heights_avg.append(heights_total)
