@@ -5,6 +5,9 @@ from typing import *
 from dataclasses import dataclass
 sys.setrecursionlimit(10**6)
 import time
+import matplotlib.pyplot as plt
+import numpy as np
+import math
 
 BinTree : TypeAlias = Union[None, "Node"]
 
@@ -21,7 +24,7 @@ class BinarySearchTree:
     comes_before: Callable[[Any, Any], bool]
     tree: BinTree
 
-TREES_PER_RUN = 10000
+TREES_PER_RUN = 1000
 
 
 #returns False if tree is empty, otherwise returns True
@@ -121,10 +124,23 @@ def height(btree : BinTree) -> int:
     return 1 + max(height(btree.left), height(btree.right))
 
 n_max = 10000
+def gettreetime (n: int) -> float:
+    #btree : TypeAlias = List[BinarySearchTree]
+    #for i in range(TREES_PER_RUN):
+     #   btree[i] = random_tree(n)
+    start = time.perf_counter()
+    for i in range(TREES_PER_RUN):
+        btree = random_tree(n)
+        insert(btree,random.random())
+    end = time.perf_counter()
+    return(end-start)
 
-start = time.perf_counter()
-for i in range(TREES_PER_RUN):
-    btree = random_tree(n_max)
-    height(btree.tree)
-end = time.perf_counter()
-print(start-end)
+x = np.array( [int(i) for i in range( 1, 101, 2 )] )
+y = np.array( [gettreetime(i) for i in range( 1, 101, 2 )] )
+plt.plot(x,y, label ="Time to insert")
+plt.xlabel("N")
+plt.ylabel("Y")
+plt.title("Graph")
+plt.grid(True)
+plt.legend()
+plt.show()
