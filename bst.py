@@ -61,7 +61,6 @@ def insert(given_bst: BinarySearchTree, val: Any) -> BinarySearchTree:
 
 #returns a random BinarySearchTree composed of 'n' random floats [0,1]
 def random_tree(n: int)-> BinarySearchTree:
-
     tree : BinarySearchTree = BinarySearchTree(comes_before_lessthan, None)
 
     for numb in range(n):
@@ -144,3 +143,23 @@ plt.title("Graph")
 plt.grid(True)
 plt.legend()
 plt.show()
+n_max = 30
+heights_total = 0
+all_heights_avg = []
+
+for i in range(n_max):
+    for b in range(TREES_PER_RUN):
+        btree = random_tree(i)
+        heights_total += height(btree.tree)
+    heights_total = heights_total / TREES_PER_RUN
+    all_heights_avg.append(heights_total)
+
+
+
+
+
+'''
+Make a graph of average tree height (y axis) as a funcƟon of N (x axis). Use 50(do 30) different N
+samples spaced evenly from N=0 to N=n_max. At each N you’ll find the average height of
+TREES_PER_RUN random trees of size N. 
+'''
